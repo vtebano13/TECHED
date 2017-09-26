@@ -1,3 +1,39 @@
 ID: TECHED
 _schema-version: '2.0'
 version: 0.0.1
+modules:
+  - name: db
+    type: hdb
+    path: db
+    requires:
+      - name: hdi-container
+        properties:
+          TARGET_CONTAINER: '~{hdi-container-name}'
+      - name: shine-container
+  - name: js
+    type: nodejs
+    path: js
+    provides:
+      - name: js_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: db
+      - name: hdi-container
+
+  
+
+resources:
+  - name: hdi-container
+    parameters:
+      config:
+        schema: DB
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: shine-container
+    type: org.cloudfoundry.existing-service
+    properties:
+      container-name: '${service-name}'
+    parameters:
+      service-name: shine-container

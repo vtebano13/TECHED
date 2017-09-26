@@ -1,0 +1,15 @@
+{
+  "PO_HEADER": {
+    "target": {
+      "object": "PO.Header",
+      "schema": "SHINE_SCHEMA_1"
+    }
+  },
+  "PO_ITEM": {
+    "target": {
+      "object": "PO.ItemView",
+      "schema": "SHINE_SCHEMA_1"
+    }
+  }
+}
+

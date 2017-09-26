@@ -1,0 +1,31 @@
+using PO_HEADER as PO_H;
+using PO_ITEM as PO_I;
+
+context PO {
+    define view PO_VIEW as
+        select from PO_H join APPROVAL_STATUS as A on "A"."ID" = "PO_H"."APPROVALSTATUS"
+        {
+            "PO_H"."PURCHASEORDERID" as "PURCHASEORDERID",
+            "PO_H"."APPROVALSTATUS" as "APPROVALSTATUS",
+            "PO_H"."GROSSAMOUNT" as "GROSSAMOUNT",
+            "PO_H"."CURRENCY" as "CURRENCY",
+            "A"."TEXT" as "TEXT"
+        };
+    define view PO_ITEM_VIEW as
+        select from PO_I
+
+        {
+        	"PurchaseOrderItemId",
+            "ItemPos",
+            "ProductID",
+            "Quantity",
+            "QuantityUnit",
+            "Amount",
+            "CurrencyCode"
+        };
+
+    Entity APPROVAL_STATUS {
+    	key ID : String(1);
+    	TEXT : String(200);
+    }
+};
